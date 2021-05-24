@@ -575,7 +575,8 @@ class Auth
             }
         } else {
             if ($ip !== $db_ip) {
-                return false;
+                // [Interwise IT:: 2021-05-24] Disable IP restricted sessions for mobile users
+                // return false;
             }
         }
 
@@ -1746,7 +1747,7 @@ class Auth
      */
     public function __lang(string $key, ...$args) : string
     {
-        $string = array_key_exists($key, $this->messages_dictionary) ? $this->messages_dictionary[$key] : $key;
+        $string = array_key_exists($key, (array)$this->messages_dictionary) ? $this->messages_dictionary[$key] : $key;
         return (func_num_args() > 1) ? vsprintf($string, $args) : $string;
     }
 
